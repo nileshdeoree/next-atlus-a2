@@ -5,7 +5,8 @@ const Index = ({ users }) => {
   const [credentials, setCredentials] = useState({ name: "", email: "" })
   const [userList, setUserList] = useState(users)
 
-  const baseUrl = process.env.BASE_URL || "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  console.log("baseUrl :: ",baseUrl);
 
   const fetchUsers = async()=>{
     const response = await fetch(`${baseUrl}/api/getuser`)
@@ -61,7 +62,7 @@ const Index = ({ users }) => {
 }
 
 export async function getServerSideProps(context) {
-  const baseUrl = process.env.BASE_URL || "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
   const res = await fetch(`${baseUrl}/api/getuser`);
   const users = await res.json();
 
