@@ -5,15 +5,17 @@ const Index = ({ users }) => {
   const [credentials, setCredentials] = useState({ name: "", email: "" })
   const [userList, setUserList] = useState(users)
 
+  const baseUrl = process.env.BASE_URL || "http://localhost:3000";
+
   const fetchUsers = async()=>{
-    const response = await fetch(`{process.env.BASE_URL}/api/getuser`)
+    const response = await fetch(`${baseUrl}/api/getuser`)
     const updatedUsers = await response.json()
     setUserList(updatedUsers)
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch(`{process.env.BASE_URL}/api/adduser`, {
+    const response = await fetch(`${baseUrl}/api/adduser`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
